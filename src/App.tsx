@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { BlocksIcon } from '@/components/BlocksIcon'
-import { XIcon } from '@/components/XIcon'
+import { BlocksIcon } from '@/components/icons/BlocksIcon'
+import { XIcon } from '@/components/icons/XIcon'
 import TextInputIcon from '@/assets/icons/TextInputIcon.svg'
 import EmailInputIcon from '@/assets/icons/EmailInputIcon.svg'
 import PasswordInputIcon from '@/assets/icons/PasswordInputIcon.svg'
