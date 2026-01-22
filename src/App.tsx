@@ -37,7 +37,6 @@ function App() {
       </header>
 
       <div id="main-content" className="flex flex-1 mt-10">
-        {/* First Sidebar - Icon Bar */}
         <aside className="w-12 bg-white border-r border-gray-200 flex flex-col items-center py-4">
           <BlocksIcon
             id="components-icon"
@@ -48,7 +47,6 @@ function App() {
           />
         </aside>
 
-        {/* Components Sidebar - Opens when plus is clicked */}
         {isComponentsSidebarOpen && (
           <aside id="sidebar" className="w-72 bg-white border-r border-gray-200 flex flex-col h-full">
             {/* Components Section Header */}
@@ -85,57 +83,57 @@ function App() {
               {/* Text inputs section */}
               <div className="mb-6">
                 <h3 className="text-xs font-semibold text-gray-700 mb-3 uppercase tracking-wide">Text inputs</h3>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-3 gap-2">
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Editable Text" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Editable Text</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Editable Text Area" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Editable Text Area</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Email" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Email</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="JSON Editor" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">JSON Editor</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Password" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Password</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Rich Text Editor" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Rich Text Editor</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Text Area" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Text Area</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Text Input" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Text Input</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="URL" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">URL</span>
@@ -146,51 +144,51 @@ function App() {
               {/* Number inputs section */}
               <div className="mb-6">
                 <h3 className="text-xs font-semibold text-gray-700 mb-3 uppercase tracking-wide">Number inputs</h3>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-3 gap-2">
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Currency" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Currency</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Editable Number" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Editable Number</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Number Input" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Number Input</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Percent" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Percent</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Phone Number" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Phone Number</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Range Slider" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Range Slider</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Rating" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Rating</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Slider" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Slider</span>
@@ -201,75 +199,75 @@ function App() {
               {/* Select inputs section */}
               <div className="mb-6">
                 <h3 className="text-xs font-semibold text-gray-700 mb-3 uppercase tracking-wide">Select inputs</h3>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-3 gap-2">
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Cascader" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Cascader</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Checkbox" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Checkbox</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Checkbox Group" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Checkbox Group</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Checkbox Tree" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Checkbox Tree</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Listbox" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Listbox</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Multiselect" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Multiselect</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Multiselect Listbox" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Multiselect Listbox</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Radio Group" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Radio Group</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Segmented Control" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Segmented Control</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Select" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Select</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Switch" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Switch</span>
                   </div>
                   <div className="flex flex-col items-center cursor-pointer group">
-                    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-2 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={InputTextIcon} alt="Switch Group" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Switch Group</span>
