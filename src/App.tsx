@@ -7,6 +7,12 @@ import PasswordInputIcon from '@/assets/icons/PasswordInputIcon.svg'
 import SearchInputIcon from '@/assets/icons/SearchInputIcon.svg'
 import TextAreaIcon from '@/assets/icons/TextAreaIcon.svg'
 import UrlInputIcon from '@/assets/icons/UrlInputIcon.svg'
+import NumberInputIcon from '@/assets/icons/NumberInputIcon.svg'
+import PhoneInputIcon from '@/assets/icons/PhoneInputIcon.svg'
+import RangerInputIcon from '@/assets/icons/RangerInputIcon.svg'
+import CheckboxIcon from '@/assets/icons/CheckboxIcon.svg'
+import CheckboxGroupIcon from '@/assets/icons/CheckboxGroupIcon.svg'
+import RadioGroupIcon from '@/assets/icons/RadioGroupIcon.svg'
 
 function App() {
   const [isComponentsSidebarOpen, setIsComponentsSidebarOpen] = useState(false)
@@ -120,82 +126,50 @@ function App() {
                 </div>
               </div>
 
-              {/* Number inputs section */}
-              <div className="mb-6">
-                <h3 className="text-xs font-semibold text-gray-700 mb-3 uppercase tracking-wide">Number inputs</h3>
+              <div id="number-inputs" className="mb-6">
+                <h3 className="text-xs font-semibold text-gray-700 mb-3 tracking-wide">Number inputs</h3>
                 <div className="grid grid-cols-3 gap-2">
                   <div className="flex flex-col items-center cursor-grab group">
                     <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                      <img src={TextInputIcon} alt="Currency" className="w-full h-auto" />
-                    </div>
-                    <span className="text-xs text-gray-600 mt-1.5 text-center">Currency</span>
-                  </div>
-                  <div className="flex flex-col items-center cursor-grab group">
-                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                      <img src={TextInputIcon} alt="Editable Number" className="w-full h-auto" />
-                    </div>
-                    <span className="text-xs text-gray-600 mt-1.5 text-center">Editable Number</span>
-                  </div>
-                  <div className="flex flex-col items-center cursor-grab group">
-                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                      <img src={TextInputIcon} alt="Number Input" className="w-full h-auto" />
+                      <img src={NumberInputIcon} alt="Number Input" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Number Input</span>
                   </div>
                   <div className="flex flex-col items-center cursor-grab group">
                     <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                      <img src={TextInputIcon} alt="Percent" className="w-full h-auto" />
-                    </div>
-                    <span className="text-xs text-gray-600 mt-1.5 text-center">Percent</span>
-                  </div>
-                  <div className="flex flex-col items-center cursor-grab group">
-                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                      <img src={TextInputIcon} alt="Phone Number" className="w-full h-auto" />
+                      <img src={PhoneInputIcon} alt="Phone Number" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Phone Number</span>
                   </div>
                   <div className="flex flex-col items-center cursor-grab group">
                     <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                      <img src={TextInputIcon} alt="Range Slider" className="w-full h-auto" />
+                      <img src={RangerInputIcon} alt="Ranger Input" className="w-full h-auto" />
                     </div>
-                    <span className="text-xs text-gray-600 mt-1.5 text-center">Range Slider</span>
-                  </div>
-                  <div className="flex flex-col items-center cursor-grab group">
-                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                      <img src={TextInputIcon} alt="Rating" className="w-full h-auto" />
-                    </div>
-                    <span className="text-xs text-gray-600 mt-1.5 text-center">Rating</span>
-                  </div>
-                  <div className="flex flex-col items-center cursor-grab group">
-                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                      <img src={TextInputIcon} alt="Slider" className="w-full h-auto" />
-                    </div>
-                    <span className="text-xs text-gray-600 mt-1.5 text-center">Slider</span>
+                    <span className="text-xs text-gray-600 mt-1.5 text-center">Ranger Input</span>
                   </div>
                 </div>
               </div>
 
-              {/* Select inputs section */}
-              <div className="mb-6">
-                <h3 className="text-xs font-semibold text-gray-700 mb-3 uppercase tracking-wide">Select inputs</h3>
+              <div id="select-inputs" className="mb-6">
+                <h3 className="text-xs font-semibold text-gray-700 mb-3 tracking-wide">Select inputs</h3>
                 <div className="grid grid-cols-3 gap-2">
                   <div className="flex flex-col items-center cursor-grab group">
                     <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                      <img src={TextInputIcon} alt="Cascader" className="w-full h-auto" />
-                    </div>
-                    <span className="text-xs text-gray-600 mt-1.5 text-center">Cascader</span>
-                  </div>
-                  <div className="flex flex-col items-center cursor-grab group">
-                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                      <img src={TextInputIcon} alt="Checkbox" className="w-full h-auto" />
+                      <img src={CheckboxIcon} alt="Checkbox" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Checkbox</span>
                   </div>
                   <div className="flex flex-col items-center cursor-grab group">
                     <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                      <img src={TextInputIcon} alt="Checkbox Group" className="w-full h-auto" />
+                      <img src={CheckboxGroupIcon} alt="Checkbox Group" className="w-full h-auto" />
                     </div>
                     <span className="text-xs text-gray-600 mt-1.5 text-center">Checkbox Group</span>
+                  </div>
+                  <div className="flex flex-col items-center cursor-grab group">
+                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                      <img src={RadioGroupIcon} alt="Radio Group" className="w-full h-auto" />
+                    </div>
+                    <span className="text-xs text-gray-600 mt-1.5 text-center">Radio Group</span>
                   </div>
                   <div className="flex flex-col items-center cursor-grab group">
                     <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
