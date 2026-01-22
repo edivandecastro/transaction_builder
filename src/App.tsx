@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Header from '@/components/layout/Header'
 import Toolbar from '@/components/layout/Toolbar'
 import Sidebar from '@/components/layout/Sidebar'
+import Footer from '@/components/layout/Footer'
 
 function App() {
   const [isComponentsSidebarOpen, setIsComponentsSidebarOpen] = useState(false)
@@ -30,12 +31,7 @@ function App() {
         </main>
       </div>
 
-      <footer id="footer" className="fixed bottom-0 left-0 right-0 h-12 bg-white border-t border-gray-200 flex items-center px-6 z-50">
-        <div className="flex items-center gap-x-2">
-          <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-          <span className="text-sm text-gray-600">production</span>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
