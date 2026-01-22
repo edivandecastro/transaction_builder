@@ -13,35 +13,14 @@ import RangerInputIcon from '@/assets/icons/RangerInputIcon.svg'
 import CheckboxIcon from '@/assets/icons/CheckboxIcon.svg'
 import CheckboxGroupIcon from '@/assets/icons/CheckboxGroupIcon.svg'
 import RadioGroupIcon from '@/assets/icons/RadioGroupIcon.svg'
+import Header from '@/components/layout/Header'
 
 function App() {
   const [isComponentsSidebarOpen, setIsComponentsSidebarOpen] = useState(false)
 
   return (
     <div className="h-screen flex flex-col bg-gray-50">
-      <header id="header" className="fixed top-0 left-0 right-0 h-10 bg-white border-b border-gray-200 z-50">
-        <div className="h-full flex items-center justify-between px-3">
-          <div id="left-section" className="flex items-center gap-x-4">
-            <div id="logo">
-              <svg className="w-6 h-6 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
-                <rect x="2" y="4" width="9" height="9" rx="0" />
-                <rect x="12" y="1" width="8" height="8" rx="0" />
-                <rect x="12" y="10" width="11" height="8" rx="0" />
-                <rect x="12" y="19" width="8" height="4" rx="0" />
-                <rect x="-1" y="14" width="12" height="9" rx="0" />
-              </svg>
-            </div>
-
-            <h1 className="text-sm font-semibold text-gray-700">Microservices</h1>
-          </div>
-
-          <div id="right-section" className="flex items-center">
-            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
-              <span className="text-white text-sm font-medium">U</span>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <div id="main-content" className="flex flex-1 mt-10">
         <aside id="toolbar" className="fixed top-10 left-0 w-12 bg-white border-r border-gray-200 flex flex-col items-center py-4 h-[calc(100vh-2.5rem-3rem)] z-40">
