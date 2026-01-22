@@ -15,11 +15,9 @@ function App() {
     <div className="h-screen flex flex-col bg-gray-50">
       <header id="header" className="fixed top-0 left-0 right-0 h-10 bg-white border-b border-gray-200 z-50">
         <div className="h-full flex items-center justify-between px-3">
-          {/* Left Section - Navigation (Aesthetic only) */}
-          <div className="flex items-center gap-x-4">
-            {/* Logo placeholder (future logo will go here) */}
-            <div>
-              <svg className="w-6 h-6 text-gray-800" viewBox="0 0 24 24" fill="currentColor">
+          <div id="left-section" className="flex items-center gap-x-4">
+            <div id="logo">
+              <svg className="w-6 h-6 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
                 <rect x="2" y="4" width="9" height="9" rx="0" />
                 <rect x="12" y="1" width="8" height="8" rx="0" />
                 <rect x="12" y="10" width="11" height="8" rx="0" />
@@ -28,12 +26,10 @@ function App() {
               </svg>
             </div>
 
-            {/* Microservices Text */}
-            <h1 className="text-sm font-semibold text-gray-900">Microservices</h1>
+            <h1 className="text-sm font-semibold text-gray-700">Microservices</h1>
           </div>
 
-          {/* Right Section - User Profile */}
-          <div className="flex items-center">
+          <div id="right-section" className="flex items-center">
             <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
               <span className="text-white text-sm font-medium">U</span>
             </div>
@@ -42,10 +38,10 @@ function App() {
       </header>
 
       <div id="main-content" className="flex flex-1 mt-10">
-        <aside className="w-12 bg-white border-r border-gray-200 flex flex-col items-center py-4">
+        <aside id="toolbar" className="fixed top-10 left-0 w-12 bg-white border-r border-gray-200 flex flex-col items-center py-4 h-[calc(100vh-2.5rem-3rem)] z-40">
           <BlocksIcon
             id="components-icon"
-            className={`cursor-pointer text-gray-600 rounded-sm p-2 ${isComponentsSidebarOpen ? ' bg-gray-100' : ''}`}
+            className={`cursor-pointer text-gray-700 rounded-sm p-2 ${isComponentsSidebarOpen ? ' bg-gray-100' : ''}`}
             onClick={() => setIsComponentsSidebarOpen(true)}
             size={20}
             title="Open Components"
@@ -53,12 +49,11 @@ function App() {
         </aside>
 
         {isComponentsSidebarOpen && (
-          <aside id="sidebar" className="w-72 bg-white border-r border-gray-200 flex flex-col h-[calc(100vh-2.5rem)] overflow-hidden">
-            {/* Components Section Header */}
-            <div className="py-2 px-4 flex justify-between items-center border-b border-gray-200 flex-shrink-0">
-              <h2 className="text-sm font-semibold text-gray-900">Components</h2>
-              {/* Close Button */}
+          <aside id="sidebar" className="fixed top-10 left-12 w-72 bg-white border-r border-gray-200 flex flex-col h-[calc(100vh-2.5rem-3rem)] overflow-hidden z-40">
+            <div id="components-section-header" className="py-2 px-4 flex justify-between items-center border-b border-gray-200 flex-shrink-0">
+              <h2 className="text-sm font-semibold text-gray-700">Components</h2>
               <button
+                id="close-sidebar-button"
                 onClick={() => setIsComponentsSidebarOpen(false)}
                 className="w-6 h-6 rounded-md hover:bg-gray-100 flex items-center justify-center transition-colors"
                 title="Close components sidebar"
@@ -67,8 +62,7 @@ function App() {
               </button>
             </div>
 
-            {/* Search Bar */}
-            <div className="px-6 py-4 border-b border-gray-200 flex-shrink-0">
+            <div id="search-bar" className="px-6 py-4 flex-shrink-0">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,47 +77,45 @@ function App() {
               </div>
             </div>
 
-            {/* Components List Area */}
-            <div className="flex-1 overflow-y-auto px-6 py-4 min-h-0">
-              {/* Text inputs section */}
-              <div className="mb-6">
+            <div id="components-list" className="flex-1 overflow-y-auto px-6 py-4 min-h-0">
+              <div id="text-inputs" className="mb-6">
                 <h3 className="text-xs font-semibold text-gray-700 mb-3 tracking-wide">Text Input</h3>
                 <div className="grid grid-cols-3 gap-2">
                   <div className="flex flex-col items-center cursor-grab group">
                     <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={TextInputIcon} alt="Text Input" className="w-full h-auto" />
                     </div>
-                    <span className="text-xs text-gray-600 mt-1.5 text-center">Text Input</span>
+                    <span className="text-xs text-gray-700 mt-1.5 text-center">Text Input</span>
                   </div>
                   <div className="flex flex-col items-center cursor-grab group">
                     <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={EmailInputIcon} alt="Email" className="w-full h-auto" />
                     </div>
-                    <span className="text-xs text-gray-600 mt-1.5 text-center">Email</span>
+                    <span className="text-xs text-gray-700 mt-1.5 text-center">Email</span>
                   </div>
                   <div className="flex flex-col items-center cursor-grab group">
                     <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={PasswordInputIcon} alt="Password" className="w-full h-auto" />
                     </div>
-                    <span className="text-xs text-gray-600 mt-1.5 text-center">Password</span>
+                    <span className="text-xs text-gray-700 mt-1.5 text-center">Password</span>
                   </div>
                   <div className="flex flex-col items-center cursor-grab group">
                     <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={SearchInputIcon} alt="Search" className="w-full h-auto" />
                     </div>
-                    <span className="text-xs text-gray-600 mt-1.5 text-center">Search</span>
+                    <span className="text-xs text-gray-700 mt-1.5 text-center">Search</span>
                   </div>
                   <div className="flex flex-col items-center cursor-grab group">
                     <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={TextAreaIcon} alt="Text Area" className="w-full h-auto" />
                     </div>
-                    <span className="text-xs text-gray-600 mt-1.5 text-center">Text Area</span>
+                    <span className="text-xs text-gray-700 mt-1.5 text-center">Text Area</span>
                   </div>
                   <div className="flex flex-col items-center cursor-grab group">
                     <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={UrlInputIcon} alt="URL" className="w-full h-auto" />
                     </div>
-                    <span className="text-xs text-gray-600 mt-1.5 text-center">URL</span>
+                    <span className="text-xs text-gray-700 mt-1.5 text-center">URL</span>
                   </div>
                 </div>
               </div>
@@ -265,27 +257,22 @@ function App() {
           </aside>
         )}
 
-        {/* Main Content Area */}
-        <main className="flex-1 bg-gray-50 bg-grid-pattern p-8 overflow-auto">
-          {/* Inner Canvas/Frame */}
-          <div className="relative bg-white border-2 border-blue-500 rounded-lg p-8 min-h-[600px]">
-            {/* Main Tag */}
-            <div className="absolute top-2 left-2">
+        <main id="desktop" className={`flex-1 bg-gray-50 bg-grid-pattern pt-8 pr-8 pb-20 pl-8 overflow-auto transition-all duration-200 ml-12 ${isComponentsSidebarOpen ? 'ml-[21rem]' : ''}`}>
+          <div id="canvas" className="relative bg-white border-2 border-blue-500 rounded-lg p-8 min-h-[600px] w-full">
+            <div id="main-tag" className="absolute top-2 left-2">
               <span className="inline-block px-2 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full uppercase">
                 Main
               </span>
             </div>
 
-            {/* Content Area */}
-            <div className="mt-8">
-              {/* Content would go here */}
+            <div id="content-area" className="mt-8">
+
             </div>
           </div>
         </main>
       </div>
 
-      {/* Footer */}
-      <footer className="h-12 bg-white border-t border-gray-200 flex items-center px-6">
+      <footer id="footer" className="fixed bottom-0 left-0 right-0 h-12 bg-white border-t border-gray-200 flex items-center px-6 z-50">
         <div className="flex items-center gap-x-2">
           <div className="w-2 h-2 rounded-full bg-blue-500"></div>
           <span className="text-sm text-gray-600">production</span>
