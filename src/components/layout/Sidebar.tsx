@@ -1,3 +1,4 @@
+import { useDraggable } from '@dnd-kit/core'
 import { XIcon } from '@/components/icons/XIcon'
 import TextInputIcon from '@/assets/icons/TextInputIcon.svg'
 import EmailInputIcon from '@/assets/icons/EmailInputIcon.svg'
@@ -15,6 +16,33 @@ import RadioGroupIcon from '@/assets/icons/RadioGroupIcon.svg'
 type SidebarProps = {
   onClose: () => void;
 };
+
+type DraggableComponentProps = {
+  id: string;
+  icon: string;
+  label: string;
+  alt: string;
+};
+
+function DraggableComponent({ id, icon, label, alt }: DraggableComponentProps) {
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+    id,
+  })
+
+  return (
+    <div
+      ref={setNodeRef}
+      {...listeners}
+      {...attributes}
+      className={`flex flex-col items-center cursor-grab group ${isDragging ? 'opacity-50' : ''}`}
+    >
+      <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+        <img src={icon} alt={alt} className="w-full h-auto" />
+      </div>
+      <span className="text-xs text-gray-700 mt-1.5 text-center">{label}</span>
+    </div>
+  )
+}
 
 
 export default function Sidebar({ onClose }: SidebarProps) {
@@ -51,12 +79,12 @@ export default function Sidebar({ onClose }: SidebarProps) {
               <div id="text-inputs" className="mb-6">
                 <h3 className="text-xs font-semibold text-gray-700 mb-3 tracking-wide">Text Input</h3>
                 <div className="grid grid-cols-3 gap-2">
-                  <div className="flex flex-col items-center cursor-grab group">
-                    <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                      <img src={TextInputIcon} alt="Text Input" className="w-full h-auto" />
-                    </div>
-                    <span className="text-xs text-gray-700 mt-1.5 text-center">Text Input</span>
-                  </div>
+                  <DraggableComponent
+                    id="text-input"
+                    icon={TextInputIcon}
+                    label="Text Input"
+                    alt="Text Input"
+                  />
                   <div className="flex flex-col items-center cursor-grab group">
                     <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                       <img src={EmailInputIcon} alt="Email" className="w-full h-auto" />
