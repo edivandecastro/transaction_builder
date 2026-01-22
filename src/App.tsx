@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { BlocksIcon } from '@/components/icons/BlocksIcon'
 import { XIcon } from '@/components/icons/XIcon'
 import TextInputIcon from '@/assets/icons/TextInputIcon.svg'
 import EmailInputIcon from '@/assets/icons/EmailInputIcon.svg'
@@ -14,6 +13,7 @@ import CheckboxIcon from '@/assets/icons/CheckboxIcon.svg'
 import CheckboxGroupIcon from '@/assets/icons/CheckboxGroupIcon.svg'
 import RadioGroupIcon from '@/assets/icons/RadioGroupIcon.svg'
 import Header from '@/components/layout/Header'
+import Toolbar from './components/layout/Toolbar'
 
 function App() {
   const [isComponentsSidebarOpen, setIsComponentsSidebarOpen] = useState(false)
@@ -23,15 +23,7 @@ function App() {
       <Header />
 
       <div id="main-content" className="flex flex-1 mt-10">
-        <aside id="toolbar" className="fixed top-10 left-0 w-12 bg-white border-r border-gray-200 flex flex-col items-center py-4 h-[calc(100vh-2.5rem-3rem)] z-40">
-          <BlocksIcon
-            id="components-icon"
-            className={`cursor-pointer text-gray-700 rounded-sm p-2 ${isComponentsSidebarOpen ? ' bg-gray-100' : ''}`}
-            onClick={() => setIsComponentsSidebarOpen(true)}
-            size={20}
-            title="Open Components"
-          />
-        </aside>
+        <Toolbar isComponentsSidebarOpen={isComponentsSidebarOpen} setIsComponentsSidebarOpen={setIsComponentsSidebarOpen} />
 
         {isComponentsSidebarOpen && (
           <aside id="sidebar" className="fixed top-10 left-12 w-72 bg-white border-r border-gray-200 flex flex-col h-[calc(100vh-2.5rem-3rem)] overflow-hidden z-40">
