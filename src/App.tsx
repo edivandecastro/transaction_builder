@@ -5,6 +5,7 @@ import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
 import Header from '@/components/layout/Header'
 import Toolbar from '@/components/layout/Toolbar'
 import Sidebar from '@/components/layout/Sidebar'
+import PropertiesSidebar from '@/components/layout/PropertiesSidebar'
 import Footer from '@/components/layout/Footer'
 import TextInput from '@/components/inputs/TextInput'
 
@@ -33,6 +34,11 @@ function App() {
   const [isComponentsSidebarOpen, setIsComponentsSidebarOpen] = useState(false)
   const [canvasComponents, setCanvasComponents] = useState<CanvasComponent[]>([])
   const [activeId, setActiveId] = useState<string | null>(null)
+  const [selectedComponent, setSelectedComponent] = useState<{
+    id: string
+    type: string
+    name: string
+  } | null>(null)
 
   const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as string)
@@ -62,10 +68,39 @@ function App() {
     setActiveId(null)
   }
 
+  const getComponentName = (type: string): string => {
+    const names: Record<string, string> = {
+      'text-input': 'textInput1',
+      'email-input': 'emailInput1',
+      'password-input': 'passwordInput1',
+    }
+    return names[type] || type
+  }
+
+  const handleComponentClick = (component: CanvasComponent) => {
+    setSelectedComponent({
+      id: component.id,
+      type: component.type,
+      name: getComponentName(component.type),
+    })
+  }
+
   const renderComponent = (component: CanvasComponent) => {
+    const isSelected = selectedComponent?.id === component.id
+
     switch (component.type) {
       case 'text-input':
-        return <TextInput key={component.id} id={component.id} />
+        return (
+          <div
+            key={component.id}
+            onClick={() => handleComponentClick(component)}
+            className={`w-full cursor-pointer transition-all ${
+              isSelected ? 'ring-2 ring-blue-500 rounded-md p-2 -m-2' : ''
+            }`}
+          >
+            <TextInput id={component.id} />
+          </div>
+        )
       default:
         return null
     }
@@ -81,7 +116,12 @@ function App() {
 
           {isComponentsSidebarOpen && <Sidebar onClose={() => setIsComponentsSidebarOpen(false)} />}
 
-          <main id="desktop" className={`flex-1 bg-gray-50 bg-grid-pattern pt-8 pr-8 pb-20 pl-8 overflow-auto transition-all duration-200 ml-12 ${isComponentsSidebarOpen ? 'ml-[21rem]' : ''}`}>
+          <main
+            id="desktop"
+            className={`flex-1 bg-gray-50 bg-grid-pattern pt-8 pb-20 pl-8 overflow-auto transition-all duration-200 ml-12 ${
+              isComponentsSidebarOpen ? 'ml-[21rem]' : ''
+            } ${selectedComponent ? 'pr-80' : 'pr-8'}`}
+          >
             <DroppableCanvas>
               <div id="main-tag" className="absolute top-2 left-2">
                 <span className="inline-block px-2 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full uppercase">
@@ -104,6 +144,13 @@ function App() {
             </DroppableCanvas>
           </main>
         </div>
+
+        {selectedComponent && (
+          <PropertiesSidebar
+            selectedComponent={selectedComponent}
+            onClose={() => setSelectedComponent(null)}
+          />
+        )}
 
         <Footer />
       </div>
