@@ -35,11 +35,23 @@ function DraggableComponent({ id, icon, label, alt }: DraggableComponentProps) {
       {...listeners}
       {...attributes}
       className={`flex flex-col items-center cursor-grab group ${isDragging ? 'opacity-50' : ''}`}
+      style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
     >
-      <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-        <img src={icon} alt={alt} className="w-full h-auto" />
+      <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center pointer-events-none">
+        <img 
+          src={icon} 
+          alt={alt} 
+          className="w-full h-auto"
+          draggable={false}
+          style={{ pointerEvents: 'none', userSelect: 'none' }}
+        />
       </div>
-      <span className="text-xs text-gray-700 mt-1.5 text-center">{label}</span>
+      <span 
+        className="text-xs text-gray-700 mt-1.5 text-center pointer-events-none"
+        style={{ userSelect: 'none' }}
+      >
+        {label}
+      </span>
     </div>
   )
 }

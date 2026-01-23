@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { DndContext, DragOverlay } from '@dnd-kit/core'
 import { useDroppable } from '@dnd-kit/core'
 import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core'
@@ -8,6 +8,7 @@ import Sidebar from '@/components/layout/Sidebar'
 import PropertiesSidebar from '@/components/layout/PropertiesSidebar'
 import Footer from '@/components/layout/Footer'
 import TextInput from '@/components/inputs/TextInput'
+import TextInputIcon from '@/assets/icons/TextInputIcon.svg'
 
 type CanvasComponent = {
   id: string;
@@ -46,7 +47,7 @@ function App() {
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
-    
+
     if (!over) {
       setActiveId(null)
       return
@@ -55,7 +56,7 @@ function App() {
     // Verifica se foi solto no canvas (droppable area)
     if (over.id === 'canvas-drop-zone') {
       const componentType = active.id as string
-      
+
       // Cria um novo componente no canvas
       const newComponent: CanvasComponent = {
         id: `component-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -68,6 +69,16 @@ function App() {
     setActiveId(null)
   }
 
+  // Aplica cursor grabbing durante o drag
+  useEffect(() => {
+    if (activeId) {
+      document.body.style.cursor = 'grabbing'
+      return () => {
+        document.body.style.cursor = ''
+      }
+    }
+  }, [activeId])
+
   const getComponentName = (type: string): string => {
     const names: Record<string, string> = {
       'text-input': 'textInput1',
@@ -75,6 +86,14 @@ function App() {
       'password-input': 'passwordInput1',
     }
     return names[type] || type
+  }
+
+  const getComponentIcon = (type: string): string => {
+    const icons: Record<string, string> = {
+      'text-input': TextInputIcon,
+      // Adicionar outros ícones quando necessário
+    }
+    return icons[type] || TextInputIcon
   }
 
   const handleComponentClick = (component: CanvasComponent) => {
@@ -108,7 +127,7 @@ function App() {
 
   return (
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-      <div className="h-screen flex flex-col bg-gray-50">
+      <div className={`h-screen flex flex-col bg-gray-50 ${activeId ? 'cursor-grabbing' : ''}`} style={activeId ? { cursor: 'grabbing' } : undefined}>
         <Header />
 
         <div id="main-content" className="flex flex-1 mt-10">
@@ -155,10 +174,27 @@ function App() {
         <Footer />
       </div>
 
-      <DragOverlay>
+      <DragOverlay style={{ cursor: 'grabbing' }}>
         {activeId ? (
-          <div className="opacity-50">
-            {activeId === 'text-input' && <TextInput />}
+          <div
+            className="flex flex-col items-center pointer-events-none select-none"
+            style={{ cursor: 'grabbing' }}
+          >
+            <div className="w-18 bg-white rounded-sm border border-gray-200 shadow-lg flex items-center justify-center">
+              <img
+                src={getComponentIcon(activeId)}
+                alt={activeId}
+                className="w-full h-auto"
+                draggable={false}
+                style={{ pointerEvents: 'none', userSelect: 'none', WebkitUserDrag: 'none' } as React.CSSProperties}
+              />
+            </div>
+            <span
+              className="text-xs text-gray-700 mt-1 text-center"
+              style={{ pointerEvents: 'none', userSelect: 'none' }}
+            >
+              {activeId === 'text-input' ? 'Text Input' : activeId}
+            </span>
           </div>
         ) : null}
       </DragOverlay>

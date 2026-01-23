@@ -283,3 +283,14 @@ body {
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   }
 }
+
+/* Drag and Drop cursor styles */
+[data-dragging="true"] {
+  cursor: grabbing !important;
+}
+
+[data-dragging="true"] * {
+  cursor: grabbing !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}
