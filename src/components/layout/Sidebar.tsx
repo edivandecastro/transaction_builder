@@ -34,19 +34,19 @@ function DraggableComponent({ id, icon, label, alt }: DraggableComponentProps) {
       ref={setNodeRef}
       {...listeners}
       {...attributes}
-      className={`flex flex-col items-center cursor-grab group ${isDragging ? 'opacity-50' : ''}`}
+      className={`flex flex-col items-center cursor-grab group ${isDragging ? 'opacity-30' : ''}`}
       style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
     >
       <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center pointer-events-none">
-        <img 
-          src={icon} 
-          alt={alt} 
+        <img
+          src={icon}
+          alt={alt}
           className="w-full h-auto"
           draggable={false}
           style={{ pointerEvents: 'none', userSelect: 'none' }}
         />
       </div>
-      <span 
+      <span
         className="text-xs text-gray-700 mt-1.5 text-center pointer-events-none"
         style={{ userSelect: 'none' }}
       >
@@ -97,6 +97,13 @@ export default function Sidebar({ onClose }: SidebarProps) {
               label="Text Input"
               alt="Text Input"
             />
+            <DraggableComponent
+              id="email-input"
+              icon={EmailInputIcon}
+              label="Email"
+              alt="Email"
+            />
+
             <div className="flex flex-col items-center cursor-grab group">
               <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
                 <img src={EmailInputIcon} alt="Email" className="w-full h-auto" />
