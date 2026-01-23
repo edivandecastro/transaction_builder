@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { MoreHorizontal, Search } from 'lucide-react'
+import { MoreHorizontal, Search, Plus } from 'lucide-react'
 
 type PropertiesSidebarProps = {
   selectedComponent: {
@@ -68,25 +68,50 @@ export default function PropertiesSidebar({
             <AccordionTrigger>Content</AccordionTrigger>
             <AccordionContent>
               <div className="space-y-3">
-                <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1.5">
-                    Label
+                {/* Default value */}
+                <div className="flex items-center gap-3">
+                  <label className="text-xs font-normal text-gray-500 whitespace-nowrap min-w-[100px]">
+                    Default value
                   </label>
                   <input
                     type="text"
-                    className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Enter label"
+                    className="flex-1 min-w-0 px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder=""
                   />
                 </div>
-                <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1.5">
+
+                {/* Placeholder */}
+                <div className="flex items-center gap-3">
+                  <label className="text-xs font-normal text-gray-500 whitespace-nowrap min-w-[100px]">
                     Placeholder
                   </label>
                   <input
                     type="text"
-                    className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Enter placeholder"
+                    defaultValue="Enter value"
+                    className="flex-1 min-w-0 px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
+                </div>
+
+                {/* Add-ons */}
+                <div className="space-y-2 pt-1">
+                  <div className="flex items-center gap-3">
+                    <label className="text-xs font-medium text-gray-900 whitespace-nowrap min-w-[100px]">
+                      Add-ons
+                    </label>
+                    <button
+                      type="button"
+                      className="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded transition-colors ml-auto"
+                      title="Add add-on"
+                    >
+                      <Plus className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    className="w-full px-3 py-2 text-sm text-gray-600 bg-gray-50 border border-gray-200 rounded-md hover:bg-gray-100 transition-colors text-left"
+                  >
+                    None
+                  </button>
                 </div>
               </div>
             </AccordionContent>
