@@ -9,6 +9,7 @@ import PropertiesSidebar from '@/components/layout/PropertiesSidebar'
 import Footer from '@/components/layout/Footer'
 import TextInput from '@/components/inputs/TextInput'
 import TextInputIcon from '@/assets/icons/TextInputIcon.svg'
+import EmailInputIcon from '@/assets/icons/EmailInputIcon.svg'
 
 type CanvasComponent = {
   id: string;
@@ -91,6 +92,7 @@ function App() {
   const getComponentIcon = (type: string): string => {
     const icons: Record<string, string> = {
       'text-input': TextInputIcon,
+      'email-input': EmailInputIcon,
       // Adicionar outros ícones quando necessário
     }
     return icons[type] || TextInputIcon
