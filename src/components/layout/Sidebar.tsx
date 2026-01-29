@@ -13,6 +13,16 @@ import CheckboxIcon from '@/assets/icons/CheckboxIcon.svg'
 import CheckboxGroupIcon from '@/assets/icons/CheckboxGroupIcon.svg'
 import RadioGroupIcon from '@/assets/icons/RadioGroupIcon.svg'
 
+import { useTransactionFields } from '@/hooks/useTransactionFields';
+
+type TransactionFieldItem = {
+  id: string;
+  type: string;
+  name: string;
+  group?: string;
+  icon_name?: string;
+};
+
 type SidebarProps = {
   onClose: () => void;
 };
@@ -22,12 +32,11 @@ type DraggableComponentProps = {
   icon: string;
   label: string;
   alt: string;
+  data?: { type: string; [key: string]: unknown };
 };
 
-function DraggableComponent({ id, icon, label, alt }: DraggableComponentProps) {
-  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
-    id,
-  })
+function DraggableComponent({ id, icon, label, alt, data }: DraggableComponentProps) {
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({ id, data })
 
   return (
     <div
@@ -58,6 +67,8 @@ function DraggableComponent({ id, icon, label, alt }: DraggableComponentProps) {
 
 
 export default function Sidebar({ onClose }: SidebarProps) {
+  const { data: transactionFields, isLoading, error } = useTransactionFields();
+
   return (
     <aside id="sidebar" className="fixed top-10 left-12 w-72 bg-white border-r border-gray-200 flex flex-col h-[calc(100vh-2.5rem-3rem)] overflow-hidden z-40">
       <div id="components-section-header" className="py-2 px-4 flex justify-between items-center border-b border-gray-200 flex-shrink-0">
@@ -88,156 +99,160 @@ export default function Sidebar({ onClose }: SidebarProps) {
       </div>
 
       <div id="components-list" className="flex-1 overflow-y-auto px-6 py-4 min-h-0">
-        <div id="text-inputs" className="mb-6">
-          <h3 className="text-xs font-semibold text-gray-700 mb-3 tracking-wide">Text Input</h3>
-          <div className="grid grid-cols-3 gap-2">
-            <DraggableComponent
-              id="text-input"
-              icon={TextInputIcon}
-              label="Text Input"
-              alt="Text Input"
-            />
-            <DraggableComponent
-              id="email-input"
-              icon={EmailInputIcon}
-              label="Email"
-              alt="Email"
-            />
-
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={EmailInputIcon} alt="Email" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-700 mt-1.5 text-center">Email</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={PasswordInputIcon} alt="Password" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-700 mt-1.5 text-center">Password</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={SearchInputIcon} alt="Search" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-700 mt-1.5 text-center">Search</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={TextAreaIcon} alt="Text Area" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-700 mt-1.5 text-center">Text Area</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={UrlInputIcon} alt="URL" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-700 mt-1.5 text-center">URL</span>
-            </div>
+        {isLoading ? (
+          <div className="flex h-full items-center justify-center text-sm text-gray-500">
+            Loading...
           </div>
-        </div>
-
-        <div id="number-inputs" className="mb-6">
-          <h3 className="text-xs font-semibold text-gray-700 mb-3 tracking-wide">Number inputs</h3>
-          <div className="grid grid-cols-3 gap-2">
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={NumberInputIcon} alt="Number Input" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Number Input</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={PhoneInputIcon} alt="Phone Number" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Phone Number</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={RangerInputIcon} alt="Ranger Input" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Ranger Input</span>
-            </div>
+        ) : error ? (
+          <div className="flex h-full items-center justify-center text-sm text-red-500">
+            Error ao carregar componentes.
           </div>
-        </div>
+        ) : (
+          <>
+            <div id="text-inputs" className="mb-6">
+              <h3 className="text-xs font-semibold text-gray-700 mb-3 tracking-wide">Text Input</h3>
+              <div className="grid grid-cols-3 gap-2">
+                {transactionFields?.map((field: TransactionFieldItem) => (
+                  <DraggableComponent
+                    key={field.id}
+                    id={String(field.id)}
+                    data={{ type: field.type, fieldId: field.id, name: field.name }}
+                    icon={TextInputIcon}
+                    label={field.name}
+                    alt={field.name}
+                  />
+                ))}
 
-        <div id="select-inputs" className="mb-6">
-          <h3 className="text-xs font-semibold text-gray-700 mb-3 tracking-wide">Select inputs</h3>
-          <div className="grid grid-cols-3 gap-2">
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={CheckboxIcon} alt="Checkbox" className="w-full h-auto" />
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={PasswordInputIcon} alt="Password" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-700 mt-1.5 text-center">Password</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={SearchInputIcon} alt="Search" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-700 mt-1.5 text-center">Search</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={TextAreaIcon} alt="Text Area" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-700 mt-1.5 text-center">Text Area</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={UrlInputIcon} alt="URL" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-700 mt-1.5 text-center">URL</span>
+                </div>
               </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Checkbox</span>
             </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={CheckboxGroupIcon} alt="Checkbox Group" className="w-full h-auto" />
+
+            <div id="number-inputs" className="mb-6">
+              <h3 className="text-xs font-semibold text-gray-700 mb-3 tracking-wide">Number inputs</h3>
+              <div className="grid grid-cols-3 gap-2">
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={NumberInputIcon} alt="Number Input" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Number Input</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={PhoneInputIcon} alt="Phone Number" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Phone Number</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={RangerInputIcon} alt="Ranger Input" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Ranger Input</span>
+                </div>
               </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Checkbox Group</span>
             </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={RadioGroupIcon} alt="Radio Group" className="w-full h-auto" />
+
+            <div id="select-inputs" className="mb-6">
+              <h3 className="text-xs font-semibold text-gray-700 mb-3 tracking-wide">Select inputs</h3>
+              <div className="grid grid-cols-3 gap-2">
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={CheckboxIcon} alt="Checkbox" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Checkbox</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={CheckboxGroupIcon} alt="Checkbox Group" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Checkbox Group</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={RadioGroupIcon} alt="Radio Group" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Radio Group</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={TextInputIcon} alt="Checkbox Tree" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Checkbox Tree</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={TextInputIcon} alt="Listbox" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Listbox</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={TextInputIcon} alt="Multiselect" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Multiselect</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={TextInputIcon} alt="Multiselect Listbox" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Multiselect Listbox</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={TextInputIcon} alt="Radio Group" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Radio Group</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={TextInputIcon} alt="Segmented Control" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Segmented Control</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={TextInputIcon} alt="Select" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Select</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={TextInputIcon} alt="Switch" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Switch</span>
+                </div>
+                <div className="flex flex-col items-center cursor-grab group">
+                  <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
+                    <img src={TextInputIcon} alt="Switch Group" className="w-full h-auto" />
+                  </div>
+                  <span className="text-xs text-gray-600 mt-1.5 text-center">Switch Group</span>
+                </div>
               </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Radio Group</span>
             </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={TextInputIcon} alt="Checkbox Tree" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Checkbox Tree</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={TextInputIcon} alt="Listbox" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Listbox</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={TextInputIcon} alt="Multiselect" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Multiselect</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={TextInputIcon} alt="Multiselect Listbox" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Multiselect Listbox</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={TextInputIcon} alt="Radio Group" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Radio Group</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={TextInputIcon} alt="Segmented Control" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Segmented Control</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={TextInputIcon} alt="Select" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Select</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={TextInputIcon} alt="Switch" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Switch</span>
-            </div>
-            <div className="flex flex-col items-center cursor-grab group">
-              <div className="w-full bg-white rounded-sm border border-gray-100 flex items-center justify-center">
-                <img src={TextInputIcon} alt="Switch Group" className="w-full h-auto" />
-              </div>
-              <span className="text-xs text-gray-600 mt-1.5 text-center">Switch Group</span>
-            </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </aside>
   )
