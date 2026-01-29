@@ -36,6 +36,7 @@ function App() {
   const [isComponentsSidebarOpen, setIsComponentsSidebarOpen] = useState(false)
   const [canvasComponents, setCanvasComponents] = useState<CanvasComponent[]>([])
   const [activeId, setActiveId] = useState<string | null>(null)
+  const [activeDragData, setActiveDragData] = useState<{ type?: string; name?: string } | null>(null)
   const [selectedComponent, setSelectedComponent] = useState<{
     id: string
     type: string
@@ -44,6 +45,7 @@ function App() {
 
   const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as string)
+    setActiveDragData((event.active.data.current as { type?: string; name?: string }) ?? null)
   }
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -51,12 +53,13 @@ function App() {
 
     if (!over) {
       setActiveId(null)
+      setActiveDragData(null)
       return
     }
 
     // Verifica se foi solto no canvas (droppable area)
     if (over.id === 'canvas-drop-zone') {
-      const componentType = active.id as string
+      const componentType = (active.data.current?.type as string) ?? (active.id as string)
 
       // Cria um novo componente no canvas
       const newComponent: CanvasComponent = {
@@ -68,6 +71,7 @@ function App() {
     }
 
     setActiveId(null)
+    setActiveDragData(null)
   }
 
   // Aplica cursor grabbing durante o drag
@@ -111,6 +115,18 @@ function App() {
 
     switch (component.type) {
       case 'text-input':
+        return (
+          <div
+            key={component.id}
+            onClick={() => handleComponentClick(component)}
+            className={`w-full cursor-pointer transition-all ${
+              isSelected ? 'ring-2 ring-blue-500 rounded-md p-2 -m-2' : ''
+            }`}
+          >
+            <TextInput id={component.id} />
+          </div>
+        )
+      case 'email-input':
         return (
           <div
             key={component.id}
@@ -184,8 +200,8 @@ function App() {
           >
             <div className="w-18 bg-white rounded-sm border border-gray-200 shadow-lg flex items-center justify-center">
               <img
-                src={getComponentIcon(activeId)}
-                alt={activeId}
+                src={getComponentIcon(activeDragData?.type ?? activeId)}
+                alt={activeDragData?.name ?? activeId}
                 className="w-full h-auto"
                 draggable={false}
                 style={{ pointerEvents: 'none', userSelect: 'none', WebkitUserDrag: 'none' } as React.CSSProperties}
@@ -195,7 +211,7 @@ function App() {
               className="text-xs text-gray-700 mt-1 text-center"
               style={{ pointerEvents: 'none', userSelect: 'none' }}
             >
-              {activeId === 'text-input' ? 'Text Input' : activeId}
+              {activeDragData?.name ?? (activeId === 'text-input' ? 'Text Input' : activeId)}
             </span>
           </div>
         ) : null}
